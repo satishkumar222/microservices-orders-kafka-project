@@ -9,7 +9,7 @@ import com.example.order_service.entity.Orders;
 import com.example.order_service.service.OrderService;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 public class OrderController {
 
     private final OrderService service;

@@ -11,7 +11,7 @@ import com.example.user_serivce.entity.User;
 import com.example.user_serivce.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 	
 	private UserService userService;

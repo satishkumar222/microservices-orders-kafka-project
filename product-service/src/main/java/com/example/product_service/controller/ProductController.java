@@ -11,7 +11,7 @@ import com.example.product_service.entity.Product;
 import com.example.product_service.service.ProductService;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 	
 	private ProductService productService;
