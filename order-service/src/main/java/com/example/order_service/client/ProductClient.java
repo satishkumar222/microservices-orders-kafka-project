@@ -8,6 +8,6 @@ import com.example.order_service.dto.OrderDto;
 
 @FeignClient(name="product-service")
 public interface ProductClient {
-	  @GetMapping("/products/{id}")
+	  @GetMapping("/api/products/{id}")
 	    OrderDto getProductById(@PathVariable Long id);
 }
