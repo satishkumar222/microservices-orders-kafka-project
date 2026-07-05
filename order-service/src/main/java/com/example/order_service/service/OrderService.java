@@ -10,6 +10,10 @@ import com.example.order_service.entity.Orders;
 import com.example.order_service.kafka.OrderProducer;
 import com.example.order_service.repository.OrdersRepository;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @Service
 public class OrderService {
 
@@ -29,8 +33,13 @@ public class OrderService {
 	}
 
 
-
+    @CircuitBreaker(
+            name = "orderService",
+            fallbackMethod = "orderFallback")
+    @Retry(
+    	    name = "productService")
 	public Orders createOrder(Orders order) {
+    	 System.out.println("createOrder called...");
 
 //        // 🔥 1. USER VALIDATION
 //        Object user = restTemplate.getForObject(
@@ -69,4 +78,23 @@ public class OrderService {
 
         return saved;
     }
+    
+//    Rule:
+//
+//    	Fallback method parameters:
+//    Original Method Parameters
+//    +
+//    Exception
+    public Orders orderFallback(
+            Orders order,
+            Exception ex) {
+    	   System.out.println("Fallback Executed");
+
+        System.out.println(
+                "Service Down : " + ex.getMessage());
+
+        throw new RuntimeException(
+                "User Service or Product Service is unavailable. Please try later.");
+    }
+    
 }

@@ -1,7 +1,6 @@
 package com.example.user_serivce.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.user_serivce.entity.User;
 import com.example.user_serivce.repository.UserRepository;
@@ -24,5 +23,13 @@ public class UserService {
 		return userRepo.findById(id).orElse(null);
 		 
 	 }
+	 
+	 public User findByEmail(String email) {
+		return userRepo.findByEmail(email).orElseThrow(()-> new RuntimeException("user not found"));
+		 
+	 }
+	 
+	
+	 
 	
 }
