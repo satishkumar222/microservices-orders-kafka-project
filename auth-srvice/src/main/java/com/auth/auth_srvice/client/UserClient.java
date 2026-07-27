@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.auth.auth_srvice.dto.UserDto;
 
-@FeignClient(name="user-service",url="${user.service.url}")
+@FeignClient(name="user-service")
 public interface UserClient {
 	@GetMapping("/api/users/email/{email}")
 	public UserDto getUserByEmail(@PathVariable String email);
